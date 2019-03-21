@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-blogpage{% endblock %}
 
@@ -9,6 +9,13 @@
     <p class="meta">{{ page.published_date }}</p>
 
     <div class="intro">{{ page.synopsis }}</div>
+
+    {% for item in page.story_images.all %}
+        <div style="float: left; margin: 10px">
+            {% image item.image fill-320x240 %}
+            <p>{{ item.caption }}</p>
+        </div>
+    {% endfor %}
 
     {% for chapter in chapters %}
         <h2><a href="{% pageurl chapter %}">{{ chapter.title }}</a></h2>

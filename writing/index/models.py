@@ -1,12 +1,16 @@
 from django.db import models
 from django.utils import timezone
 
-from wagtail.core.models import Page
+from modelcluster.fields import ParentalKey
+
+from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel
+from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
 
+# PAGE MODELS
 class StoryIndexPage(Page):
     intro = RichTextField(blank=True)
 
@@ -22,6 +26,9 @@ class StoryIndexPage(Page):
         context['stories'] = stories
         return context
 
+    class Meta:
+        verbose_name = 'indexpage'
+
 
 class StoryMainPage(Page):
     published_date = models.DateTimeField(default=timezone.now)
@@ -35,6 +42,7 @@ class StoryMainPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('synopsis', classname='full'),
+        InlinePanel('story_images', label="Story images"),
     ]
 
     parent_page_types = ['index.StoryIndexPage']
@@ -45,6 +53,9 @@ class StoryMainPage(Page):
         chapters = self.get_children().live()
         context['chapters'] = chapters
         return context
+
+    class Meta:
+        verbose_name = 'storypage'
 
 
 class ChapterPage(Page):
@@ -62,4 +73,35 @@ class ChapterPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('order'),
         FieldPanel('body', classname='full'),
+        InlinePanel('chapter_images', label="Chapter images"),
+    ]
+
+    class Meta:
+        verbose_name = 'chapterpage'
+
+
+# IMAGE MODEL
+class StoryMainPageGalleryImage(Orderable):
+    story = ParentalKey(StoryMainPage, on_delete=models.CASCADE,
+                        related_name='story_images')
+    image = models.ForeignKey('wagtailimages.Image', on_delete=models.CASCADE,
+                              related_name='+')
+    caption = models.CharField(blank=True, max_length=200)
+
+    panels = [
+        ImageChooserPanel('image'),
+        FieldPanel('caption'),
+    ]
+
+
+class ChapterPageGalleryImage(Orderable):
+    story = ParentalKey(ChapterPage, on_delete=models.CASCADE,
+                        related_name='chapter_images')
+    image = models.ForeignKey('wagtailimages.Image', on_delete=models.CASCADE,
+                              related_name='+')
+    caption = models.CharField(blank=True, max_length=200)
+
+    panels = [
+        ImageChooserPanel('image'),
+        FieldPanel('caption'),
     ]
