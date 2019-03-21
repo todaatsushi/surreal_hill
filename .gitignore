@@ -1,0 +1,5 @@
+aenv/
+mysite/
+portfolio/db.sqlite3
+portfolio/Dockerfile
+demo/
