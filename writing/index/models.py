@@ -16,6 +16,12 @@ class StoryIndexPage(Page):
 
     subpage_types = ['index.StoryMainPage']
 
+    def get_context(self, request):
+        context = super().get_context(request)
+        stories = self.get_children().live()
+        context['stories'] = stories
+        return context
+
 
 class StoryMainPage(Page):
     published_date = models.DateTimeField(default=timezone.now)
@@ -34,16 +40,26 @@ class StoryMainPage(Page):
     parent_page_types = ['index.StoryIndexPage']
     subpage_types = ['index.ChapterPage']
 
+    def get_context(self, request):
+        context = super().get_context(request)
+        chapters = self.get_children().live()
+        context['chapters'] = chapters
+        return context
+
 
 class ChapterPage(Page):
     published_date = models.DateTimeField(default=timezone.now)
     order = models.IntegerField(null=True)
     body = RichTextField(blank=True)
-    story = models.ForeignKey(StoryMainPage, on_delete=models.SET_NULL, null=True)
 
     search_fields = [
         index.SearchField('title'),
         index.SearchField('order'),
         index.SearchField('body'),
         index.FilterField('published_date'),
+    ]
+
+    content_panels = Page.content_panels + [
+        FieldPanel('order'),
+        FieldPanel('body', classname='full'),
     ]
