@@ -13,6 +13,17 @@
         {% with story=story.specific %}
           <h2><a href="{% pageurl story %}">{{ story.title }}</a></h2>
           {{ story.synopsis|richtext }}
+          {% with categories=story.categories.all %}
+              {% if categories %}
+                  <ul>
+                    {% for category in categories %}
+                        <li style="display: inline">
+                            {{ category.name }}
+                        </li>
+                    {% endfor %}
+                  </ul>
+              {% endif %}
+          {% endwith %}
         {% endwith %}
     {% endfor %}
 

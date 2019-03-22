@@ -1,9 +1,9 @@
 from django.db import models
 from django.utils import timezone
+from django import forms
 
-from modelcluster.fields import ParentalKey
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
-from taggit.models import TaggedItemBase
 
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField
@@ -11,22 +11,8 @@ from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
-
-# TAG MODELS
-class StoryMainTags(TaggedItemBase):
-    content_object = ParentalKey(
-        'StoryMainPage',
-        related_name='tagged_items',
-        on_delete=models.CASCADE
-    )
-
-
-class ChapterTags(TaggedItemBase):
-    content_object = ParentalKey(
-        'ChapterPage',
-        related_name='tagged_items',
-        on_delete=models.CASCADE
-    )
+from .tags import StoryMainTags, ChapterTags
+from .categories import StoryCategory
 
 
 # PAGE MODELS
@@ -53,6 +39,7 @@ class StoryMainPage(Page):
     published_date = models.DateTimeField(default=timezone.now)
     synopsis = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=StoryMainTags, blank=True)
+    categories = ParentalManyToManyField('index.StoryCategory', blank=True)
 
     search_fields = [
         index.SearchField('title'),
@@ -63,7 +50,8 @@ class StoryMainPage(Page):
     content_panels = Page.content_panels + [
         MultiFieldPanel([
             FieldPanel('published_date'),
-            FieldPanel('tags')
+            FieldPanel('tags'),
+            FieldPanel('categories', widget=forms.CheckboxSelectMultiple)
         ], heading='Meta Information'),
         FieldPanel('synopsis', classname='full'),
         InlinePanel('story_images', label="Story images"),
