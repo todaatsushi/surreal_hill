@@ -2,12 +2,31 @@ from django.db import models
 from django.utils import timezone
 
 from modelcluster.fields import ParentalKey
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from taggit.models import TaggedItemBase
 
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
+
+
+# TAG MODELS
+class StoryMainTags(TaggedItemBase):
+    content_object = ParentalKey(
+        'StoryMainPage',
+        related_name='tagged_items',
+        on_delete=models.CASCADE
+    )
+
+
+class ChapterTags(TaggedItemBase):
+    content_object = ParentalKey(
+        'ChapterPage',
+        related_name='tagged_items',
+        on_delete=models.CASCADE
+    )
 
 
 # PAGE MODELS
@@ -33,6 +52,7 @@ class StoryIndexPage(Page):
 class StoryMainPage(Page):
     published_date = models.DateTimeField(default=timezone.now)
     synopsis = RichTextField(blank=True)
+    tags = ClusterTaggableManager(through=StoryMainTags, blank=True)
 
     search_fields = [
         index.SearchField('title'),
@@ -41,6 +61,10 @@ class StoryMainPage(Page):
     ]
 
     content_panels = Page.content_panels + [
+        MultiFieldPanel([
+            FieldPanel('published_date'),
+            FieldPanel('tags')
+        ], heading='Meta Information'),
         FieldPanel('synopsis', classname='full'),
         InlinePanel('story_images', label="Story images"),
     ]
@@ -62,6 +86,7 @@ class ChapterPage(Page):
     published_date = models.DateTimeField(default=timezone.now)
     order = models.IntegerField(null=True)
     body = RichTextField(blank=True)
+    tags = ClusterTaggableManager(through=ChapterTags, blank=True)
 
     search_fields = [
         index.SearchField('title'),
@@ -71,6 +96,10 @@ class ChapterPage(Page):
     ]
 
     content_panels = Page.content_panels + [
+        MultiFieldPanel([
+            FieldPanel('published_date'),
+            FieldPanel('tags')
+        ], heading='Meta Information'),
         FieldPanel('order'),
         FieldPanel('body', classname='full'),
         InlinePanel('chapter_images', label="Chapter images"),
@@ -78,6 +107,23 @@ class ChapterPage(Page):
 
     class Meta:
         verbose_name = 'chapterpage'
+
+
+# TAG INDEX PAGE
+class TagIndexPage(Page):
+
+    def get_context(self, request):
+        # Get tagged items
+        tag = request.GET.get('tag')
+
+        # Chapters & Stories Seperately
+        chapters = ChapterPage.objects.filter(tags__name=tag)
+        stories = StoryMainPage.objects.filter(tags__name=tag)
+
+        context = super().get_context(request)
+        context['chapters'] = chapters
+        context['stories'] = stories
+        return context
 
 
 # IMAGE MODEL
