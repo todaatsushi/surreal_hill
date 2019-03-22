@@ -7,6 +7,7 @@ import modelcluster.fields
 
 
 class Migration(migrations.Migration):
+    atomic = False
 
     dependencies = [
         ('taggit', '0002_auto_20150616_2121'),

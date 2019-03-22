@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-blogindexpage{% endblock %}
+
+{% block content %}
+    <h1>{{ page.title }}</h1>
+
+    <div class="intro">{{ page.intro|richtext }}</div>
+
+    {% for piece in articles %}
+
+        {% with piece=piece.specific %}
+          <h2><a href="{% pageurl piece %}">{{ piece.title }}</a></h2>
+          {{ piece.tagline|richtext }}
+          {% with categories=story.categories.all %}
+              {% if categories %}
+                  <ul>
+                    {% for category in categories %}
+                        <li style="display: inline">
+                            {{ category.name }}
+                        </li>
+                    {% endfor %}
+                  </ul>
+              {% endif %}
+          {% endwith %}
+        {% endwith %}
+
+    {% endfor %}
+
+    <a href="{{ page.get_parent.url }}">Home</a>
+
+{% endblock %}
