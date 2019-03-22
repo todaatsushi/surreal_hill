@@ -6,10 +6,10 @@
 
 {% block content %}
     <h1>{{ page.title }}</h1>
-    <h4>{{ page.header }}</h4>
-    {{ page.body|richtext }}
+    <h4>{{ page.tagline }}</h4>
+    {{ page.body }}
 
     {% for child in page.get_children %}
-      <a href="{{ child.url}}">{{child}}</a>
+      <a href="{{ child.url }}">{{child}}</a>
     {% endfor %}
 {% endblock %}
