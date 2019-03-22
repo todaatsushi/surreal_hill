@@ -18,3 +18,11 @@ class ChapterTags(TaggedItemBase):
         related_name='tagged_items',
         on_delete=models.CASCADE
     )
+
+
+class ArticleTags(TaggedItemBase):
+    content_object = ParentalKey(
+        'BlogArticlePage',
+        related_name='tagged_items',
+        on_delete=models.CASCADE
+    )

@@ -5,7 +5,7 @@ from wagtail.admin.edit_handlers import FieldPanel
 
 
 @register_snippet
-class StoryCategory(models.Model):
+class ContentCategory(models.Model):
     name = models.CharField(max_length=75)
 
     panels = [

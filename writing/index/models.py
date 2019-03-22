@@ -5,15 +5,65 @@ from django import forms
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
 
+from wagtail.core import blocks
 from wagtail.core.models import Page, Orderable
-from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.core.fields import RichTextField, StreamField
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
+from wagtail.images.blocks import ImageChooserBlock
 
-from .tags import StoryMainTags, ChapterTags
-from .categories import StoryCategory
+from .tags import StoryMainTags, ChapterTags, ArticleTags
+from .categories import ContentCategory
 
+
+## BLOG / ARTICLE MODELS
+
+class BlogIndexPage(Page):
+    intro = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('intro')
+    ]
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        articles = self.get_children().live()
+        context['articles'] = articles
+        return context
+
+
+class BlogArticlePage(Page):
+    tagline = RichTextField(blank=True)
+    published_date = models.DateTimeField(default=timezone.now)
+    body = StreamField([
+        ('intro', blocks.RichTextBlock()),
+        ('textblock', blocks.RichTextBlock()),
+        ('image', ImageChooserBlock()),
+        ])
+    tags = ClusterTaggableManager(through=ArticleTags, blank=True)
+    categories = ParentalManyToManyField('index.ContentCategory', blank=True)
+
+    search_fields = [
+        index.SearchField('title'),
+        index.SearchField('body'),
+        index.FilterField('published_date'),
+    ]
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel([
+            FieldPanel('published_date'),
+            FieldPanel('tags'),
+            FieldPanel('categories'),
+            ]),
+        FieldPanel('tagline'),
+        StreamFieldPanel('body'),
+        InlinePanel('article_images', label="Article images"),
+
+    ]
+
+
+## STORY MODELS
 
 # PAGE MODELS
 class StoryIndexPage(Page):
@@ -32,14 +82,14 @@ class StoryIndexPage(Page):
         return context
 
     class Meta:
-        verbose_name = 'indexpage'
+        verbose_name = 'StoryIndexPage'
 
 
 class StoryMainPage(Page):
     published_date = models.DateTimeField(default=timezone.now)
     synopsis = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=StoryMainTags, blank=True)
-    categories = ParentalManyToManyField('index.StoryCategory', blank=True)
+    categories = ParentalManyToManyField('index.ContentCategory', blank=True)
 
     search_fields = [
         index.SearchField('title'),
@@ -67,7 +117,7 @@ class StoryMainPage(Page):
         return context
 
     class Meta:
-        verbose_name = 'storypage'
+        verbose_name = 'StoryMainPage'
 
 
 class ChapterPage(Page):
@@ -131,6 +181,19 @@ class StoryMainPageGalleryImage(Orderable):
 class ChapterPageGalleryImage(Orderable):
     story = ParentalKey(ChapterPage, on_delete=models.CASCADE,
                         related_name='chapter_images')
+    image = models.ForeignKey('wagtailimages.Image', on_delete=models.CASCADE,
+                              related_name='+')
+    caption = models.CharField(blank=True, max_length=200)
+
+    panels = [
+        ImageChooserPanel('image'),
+        FieldPanel('caption'),
+    ]
+
+
+class ArticleGalleryImage(Orderable):
+    article = ParentalKey(BlogArticlePage, on_delete=models.CASCADE,
+                        related_name='article_images')
     image = models.ForeignKey('wagtailimages.Image', on_delete=models.CASCADE,
                               related_name='+')
     caption = models.CharField(blank=True, max_length=200)
