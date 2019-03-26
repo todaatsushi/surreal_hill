@@ -23,16 +23,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/writing.css' %}">
+        <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/writing.css' %}"> -->
+
+        {# Bulma CSS #}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
 
         {% block extra_css %}
         {% endblock %}
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
+        <div class="all">
+          {% wagtailuserbar %}
 
-        {% block content %}{% endblock %}
+          {% block content %}{% endblock %}
+        </div>
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/writing.js' %}"></script>

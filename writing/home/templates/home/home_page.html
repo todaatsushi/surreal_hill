@@ -3,13 +3,21 @@
 {% load static wagtailcore_tags %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="/css/home.css" type="text/css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/glitch.css' %}">
 {% endblock %}
 
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
+  <div class="container splash">
+    <div class="top-left">
+      <div class="glitch site-header" data-text="SURREAL"><span class="">SURREAL HILL</span>
+       </div>
+    </div>
+  </div>
+    <!-- <h1>{{ page.title }}</h1>
     {{ page.tagline|richtext }}
     {% for block in page.body %}
         {% if block.block_type == 'photo' %}
@@ -23,5 +31,5 @@
 
     {% for child in page.get_children %}
       <a href="{{ child.url }}">{{child}}</a>
-    {% endfor %}
+    {% endfor %} -->
 {% endblock %}
