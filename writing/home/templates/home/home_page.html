@@ -12,24 +12,42 @@
 
 {% block content %}
   <div class="container splash">
-    <div class="top-left">
-      <div class="glitch site-header" data-text="SURREAL"><span class="">SURREAL HILL</span>
-       </div>
-    </div>
+    <section class="site-logo animated fadeIn">
+      <div class="glitch site-header" data-text="SURREAL">
+        SURREAL <span>HILL</span>
+      </div>
+      <a href="#about" class="animated fadeIn delay-1s"><img src="/media/images/more2.png/" class="splash-more"></a>
+    </section>
+    <div class="divider animated fadeIn" id="about"></div>
+    <section class="splash-menu animated fadeIn">
+      <ul>
+        <li><a class="text-link" href="">Work</a></li>
+        <hr>
+        <li><a class="text-link" href="">Contact</a></li>
+        <hr>
+        <li><a class="text-link" href="">Blog</a></li>
+      </ul>
+    </section>
   </div>
-    <!-- <h1>{{ page.title }}</h1>
-    {{ page.tagline|richtext }}
-    {% for block in page.body %}
-        {% if block.block_type == 'photo' %}
-            <h1>{{ block.value }}</h1>
-        {% else %}
-            <section class="block-{{ block.block_type }}">
-                {% include_block block %}
-            </section>
-        {% endif %}
-    {% endfor %}
 
-    {% for child in page.get_children %}
-      <a href="{{ child.url }}">{{child}}</a>
-    {% endfor %} -->
+  <div class="container about">
+
+  </div>
+
 {% endblock %}
+
+<!-- <h1>{{ page.title }}</h1>
+{{ page.tagline|richtext }}
+{% for block in page.body %}
+    {% if block.block_type == 'photo' %}
+        <h1>{{ block.value }}</h1>
+    {% else %}
+        <section class="block-{{ block.block_type }}">
+            {% include_block block %}
+        </section>
+    {% endif %}
+{% endfor %}
+
+{% for child in page.get_children %}
+  <a href="{{ child.url }}">{{child}}</a>
+{% endfor %} -->
