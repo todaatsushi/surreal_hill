@@ -34,11 +34,18 @@
         {# Animate CSS #}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
+        {# Font Awesome #}
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
         {% block extra_css %}
         {% endblock %}
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
+        <nav class="sidebar {% block show_nav %}{% endblock %}">
+          <div class="sidebar-links">
+          </div>
+        </nav>
         <div class="all">
           {% wagtailuserbar %}
 

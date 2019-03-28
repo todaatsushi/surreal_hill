@@ -15,14 +15,32 @@ from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 class HomePage(Page):
     tagline = RichTextField(blank=True)
     body = StreamField([
-        ('welcome', blocks.RichTextBlock()),
-        ('about', blocks.RichTextBlock()),
-        ('photo', ImageChooserBlock()),
+        ('header', blocks.RichTextBlock()),
+        ('paragraph', blocks.RichTextBlock()),
+        ('iamge', ImageChooserBlock()),
         ])
 
     content_panels = Page.content_panels + [
         FieldPanel('tagline', classname='full'),
         StreamFieldPanel('body')
+    ]
+
+
+class WorkPage(Page):
+    summary = RichTextField(blank=True)
+    blog = StreamField([
+        ('about', blocks.RichTextBlock()),
+        ('photo', ImageChooserBlock()),
+    ])
+    stories = StreamField([
+        ('about', blocks.RichTextBlock()),
+        ('photo', ImageChooserBlock()),
+    ])
+
+    content_panels = Page.content_panels + [
+        FieldPanel('summary'),
+        StreamFieldPanel('blog'),
+        StreamFieldPanel('stories'),
     ]
 
 

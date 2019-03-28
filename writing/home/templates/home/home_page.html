@@ -1,53 +1,85 @@
 {% extends "base.html" %}
 
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block extra_css %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
-
   <link rel="stylesheet" type="text/css" href="{% static 'css/glitch.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block show_nav %}
+  false
 {% endblock %}
 
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-  <div class="container splash">
+  <section class="splash" id="home">
     <section class="site-logo animated fadeIn">
       <div class="glitch site-header" data-text="SURREAL">
         SURREAL <span>HILL</span>
       </div>
       <a href="#about" class="animated fadeIn delay-1s"><img src="/media/images/more2.png/" class="splash-more"></a>
     </section>
-    <div class="divider animated fadeIn" id="about"></div>
+    <div class="divider animated fadeIn"></div>
     <section class="splash-menu animated fadeIn">
       <ul>
-        <li><a class="text-link" href="">Work</a></li>
-        <hr>
-        <li><a class="text-link" href="">Contact</a></li>
-        <hr>
-        <li><a class="text-link" href="">Blog</a></li>
+        {% for sub in page.get_children %}
+          <li>
+            <a href="{% pageurl sub %}" class="text-link">{{ sub }}</a>
+          </li>
+        {% endfor %}
       </ul>
     </section>
-  </div>
+    <div class="sns animated fadeIn delay-2s">
+      <a href="" class="sns-link"><i class="fab fa-twitter"></i></a>
+      <a href="" class="sns-link"><i class="fab fa-blogger-b"></i></a>
+      <a href="" class="sns-link"><i class="fab fa-facebook-f"></i></a>
+    </div>
+  </section>
 
-  <div class="container about">
+  <section class="about" id="about">
+    <div class="sidebar">
+      <div class="sidebar-links">
+        <ul>
+          <a href="#home" class="sidebar-link">Home</a>
+          {% for sub in page.get_children %}
+            <li>
+              <a href="{% pageurl sub %}" class="sidebar-link">{{ sub }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="">
+      <section class="home-title hero">
+        <div class="hero-body">
+          <h1 class="site-header title is-1">{{ page.tagline|richtext }}</h1>
+        </div>
+      </section>
+      {% for block in page.body %}
+        <section class="about-{{ block.block_type }} about-content">
+          {% if block.block_type == 'iamge' %}
+            {% image block.value width-400%}
+          {% elif block.block_type == 'header' %}
+            <h4 class="site-header">{% include_block block %}</h4>
+          {% else %}
+            <article>
+              {% include_block block %}
+            </article>
+        {% endif %}
+        </section>
+      {% endfor %}
 
-  </div>
+      <section class="about-foot">
+        <a href="#home" class="about-links site-header">Home</a>
+        {% for sub in page.get_children %}
+          <a href="{% pageurl sub %}" class="about-links site-header">{{ sub }}</a>
+        {% endfor %}
+        <a href="#about" class="about-links site-header">Top</a>
+      </section>
+    </div>
+  </section>
 
 {% endblock %}
-
-<!-- <h1>{{ page.title }}</h1>
-{{ page.tagline|richtext }}
-{% for block in page.body %}
-    {% if block.block_type == 'photo' %}
-        <h1>{{ block.value }}</h1>
-    {% else %}
-        <section class="block-{{ block.block_type }}">
-            {% include_block block %}
-        </section>
-    {% endif %}
-{% endfor %}
-
-{% for child in page.get_children %}
-  <a href="{{ child.url }}">{{child}}</a>
-{% endfor %} -->

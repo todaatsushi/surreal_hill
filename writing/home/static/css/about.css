@@ -1,0 +1,48 @@
+/* ABOUT SECTION */
+/* HOLDING SECTION */
+.about {
+  min-height: 100%;
+  background-color: #f9f9f9;
+  display: flex;
+  /* border-top: 3px solid #FFF800;
+  border-right: 3px solid #44107A;
+  border-bottom: 3px solid #7794ff;
+  border-left: 3px solid #FF1361; */
+}
+
+/* Each block */
+.about-content {
+  padding: 0 1.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Header Blocks */
+.about-header {
+  margin: 1rem 0;
+  font-size: 1.5em;
+  letter-spacing: 1.2px;
+}
+
+/* Back to the top links */
+.about-foot {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  padding: 30px 0;
+  margin: 1.5rem 0;
+}
+
+
+.about-links {
+  font-weight: 500;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+  margin: 20px 1.5rem;
+  letter-spacing: 3px;
+  position: relative;
+  display: inline-block;
+  font-size: 1.2em;
+}
