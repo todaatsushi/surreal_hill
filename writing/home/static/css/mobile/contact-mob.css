@@ -3,12 +3,12 @@
     flex-direction: column;
   }
 
-  .sidebar-links{
-    width: 100%;
-    height: 100%;
+  .form button {
+    margin-bottom: 18%;
   }
 
-  .sidebar-links ul {
-    display: flex;
+  .form {
+    padding: 1.5rem;
+    width: 90vw;
   }
 }

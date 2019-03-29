@@ -9,5 +9,23 @@
     flex-direction: row;
     margin: 0;
     align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .sidebar-links ul {
+    display: flex;
+  }
+
+  .sns-link {
+    color: #680000;
+  }
+
+  .sns-link:link, .sns-link:visited , .sns-link:active  {
+    color: #680000;
+  }
+
+  .sns-link:hover {
+    color: #b8bacf
   }
 }
