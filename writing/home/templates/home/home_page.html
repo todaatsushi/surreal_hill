@@ -53,17 +53,17 @@
         </ul>
       </div>
     </nav>
-    
+
     <div class="hero">
       <section class="home-title hero">
         <div class="hero-body">
-          <h1 class="site-header title is-1">{{ page.tagline|richtext }}</h1>
+          <h1 class="site-header title is-1 display-header">{{ page.tagline|richtext }}</h1>
         </div>
       </section>
       {% for block in page.body %}
         <section class="about-{{ block.block_type }} about-content">
-          {% if block.block_type == 'iamge' %}
-            {% image block.value width-400%}
+          {% if block.block_type == 'image' %}
+            {% image block.value width-400 %}
           {% elif block.block_type == 'header' %}
             <h4 class="site-header">{% include_block block %}</h4>
           {% else %}

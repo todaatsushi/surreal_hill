@@ -2,4 +2,9 @@
   .all {
     flex-direction: column;
   }
+
+  .work-header {
+    height: 15%;
+  }
+
 }

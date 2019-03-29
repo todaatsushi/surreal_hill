@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block extra_css %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/desktop/work.css' %}">
@@ -10,7 +10,8 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-  <section class="container">
+  <section class="work-main">
+
     <section class="work-header hero">
       <div class="hero-body">
         <h1 class="site-header display-header hero-">{{ page.title }}</h1>
@@ -18,27 +19,52 @@
       </div>
     </section>
 
-    <section class="work-body">
-      <section class="articles">
+    <section class="work-body columns">
+      <section class="column work-sub">
 
-        <section class="article-header">
-
+        <section class="blog-body">
+          {% for block in page.blog %}
+            <section class="blog-{{ block.block_type }}">
+              {% if block.block_type == 'image' %}
+                {% image block.value height-100px %}
+              {% elif block.block_type == 'heading' %}
+                <h2 class="site-header">{% include_block block %}</h2>
+              {% else %}
+                <article class="block-p">
+                  {% include_block block %}
+                </article>
+            {% endif %}
+            </section>
+          {% endfor %}
         </section>
-        <section class="article-body">
 
-        </section>
+        <a href="#" class="text-link dark-link">Read Articles</a>
 
       </section>
 
-      <section class="stories">
-        <section class="stories-header">
+      <section class="column work-sub mob-margin">
 
-        </section>
         <section class="stories-body">
-
+          {% for block in page.stories %}
+            <section class="stories-{{ block.block_type }}">
+              {% if block.block_type == 'image' %}
+                {% image block.value height-100px %}
+              {% elif block.block_type == 'heading' %}
+                <h4 class="site-header title-header">{% include_block block %}</h4>
+              {% else %}
+                <article>
+                  {% include_block block %}
+                </article>
+            {% endif %}
+            </section>
+          {% endfor %}
         </section>
+
+        <a href="#" class="text-link dark-link">Read Stories</a>
+
       </section>
     </section>
+
   </section>
 
 {% endblock %}

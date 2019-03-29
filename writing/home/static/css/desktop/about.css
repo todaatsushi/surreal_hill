@@ -4,16 +4,21 @@
   min-height: 100%;
   background-color: #f9f9f9;
   display: flex;
-  /* border-top: 3px solid #FFF800;
-  border-right: 3px solid #44107A;
-  border-bottom: 3px solid #7794ff;
-  border-left: 3px solid #FF1361; */
+}
+
+/* HEADER */
+.hero-body {
+  padding-left: 3rem;
 }
 
 /* Each block */
 .about-content {
-  padding: 0 1.5rem;
+  padding: 0 3rem;
   margin: 1.5rem 0;
+}
+
+.about-content article {
+  text-align: justify;
 }
 
 /* Header Blocks */

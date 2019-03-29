@@ -29,10 +29,12 @@ class HomePage(Page):
 class WorkPage(Page):
     summary = RichTextField(blank=True)
     blog = StreamField([
+        ('heading', blocks.CharBlock(classname="full title")),
         ('about', blocks.RichTextBlock()),
         ('photo', ImageChooserBlock()),
     ])
     stories = StreamField([
+        ('heading', blocks.CharBlock(classname="full title")),
         ('about', blocks.RichTextBlock()),
         ('photo', ImageChooserBlock()),
     ])

@@ -1,7 +1,7 @@
 /* BASIC BACKDROP */
 .all {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   padding: 0;
   margin: 0;
   font-family: 'Roboto', serif;
@@ -52,8 +52,6 @@
   color: #b8bacf;
 }
 
-
-
 /* STRIKETHROUGH LINK HOVER */
 .text-link {
   font-weight: 500;
@@ -64,6 +62,10 @@
   letter-spacing: 8px;
   position: relative;
   display: inline-block;
+}
+
+.text-link-dark {
+  color: #000;
 }
 
 .text-link:link, .text-link:visited {
@@ -131,14 +133,20 @@
   }
 }
 
-/* DISPLAY SETTINGS ONLY */
-.mobile {
-  display: none;
+/* DARK LINKS */
+.dark-link:link, .dark-link:hover {
+  border: none;
+  font-size: 1.3em;
+  background: none;
+  font-family: "Playfair Display", serif;
+  color: black;
+  margin: 0;
+  padding: 0 3px;
+  cursor: pointer;
+  margin-bottom: 30px;
 }
 
-.full {
-  display: none;
-}
+/* DISPLAY SETTINGS ONLY */
 
 /* HIDE NAV */
 .false {
