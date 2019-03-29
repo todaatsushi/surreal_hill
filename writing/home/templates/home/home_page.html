@@ -3,9 +3,13 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block extra_css %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/glitch.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/about.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/desktop/home.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/desktop/about.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/mobile/home-mob.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/mobile/about-mob.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/misc/glitch.css' %}">
 {% endblock %}
 
 {% block show_nav %}
@@ -30,20 +34,17 @@
             <a href="{% pageurl sub %}" class="text-link">{{ sub }}</a>
           </li>
         {% endfor %}
+        <li><a href="/#about" class="text-link">About</a></li>
       </ul>
     </section>
-    <div class="sns animated fadeIn delay-2s">
-      <a href="" class="sns-link"><i class="fab fa-twitter"></i></a>
-      <a href="" class="sns-link"><i class="fab fa-blogger-b"></i></a>
-      <a href="" class="sns-link"><i class="fab fa-facebook-f"></i></a>
-    </div>
   </section>
 
   <section class="about" id="about">
-    <div class="sidebar">
+    <nav class="sidebar">
       <div class="sidebar-links">
         <ul>
           <a href="#home" class="sidebar-link">Home</a>
+          <li><a href="/#about" class="sidebar-link">About</a></li>
           {% for sub in page.get_children %}
             <li>
               <a href="{% pageurl sub %}" class="sidebar-link">{{ sub }}</a>
@@ -51,8 +52,8 @@
           {% endfor %}
         </ul>
       </div>
-    </div>
-    <div class="">
+    </nav>
+    <div class="hero">
       <section class="home-title hero">
         <div class="hero-body">
           <h1 class="site-header title is-1">{{ page.tagline|richtext }}</h1>

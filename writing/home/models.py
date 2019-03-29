@@ -17,7 +17,7 @@ class HomePage(Page):
     body = StreamField([
         ('header', blocks.RichTextBlock()),
         ('paragraph', blocks.RichTextBlock()),
-        ('iamge', ImageChooserBlock()),
+        ('image', ImageChooserBlock()),
         ])
 
     content_panels = Page.content_panels + [
@@ -50,8 +50,10 @@ class ContactFormField(AbstractFormField):
 
 class FormPage(AbstractEmailForm):
     thank_you_text = RichTextField(blank=True)
+    message = RichTextField(blank=True)
 
     content_panels = AbstractEmailForm.content_panels + [
+        FieldPanel('message', classname="full"),
         InlinePanel('form_fields', label="Form fields"),
         FieldPanel('thank_you_text', classname="full"),
         MultiFieldPanel([

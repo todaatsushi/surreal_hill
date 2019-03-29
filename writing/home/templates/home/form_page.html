@@ -1,30 +1,44 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags widget_tweaks %}
 
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/desktop/contact.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/mobile/contact-mob.css' %}">
+{% endblock %}
+
 {% block content %}
 
-<h1>Contact</h1>
-<br>
-
-<form action="{% pageurl page %}" method="POST">
-    {% csrf_token %}
-
-    {% if form.non_field_errors %}
-      <div class="alert alert-danger" role="alert">
-        {% for error in form.non_field_errors %}
-          {{ error }}
-        {% endfor %}
+<section class="container contact-main">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="site-header display-header">{{ page.title }}</h1>
+        <h2 class="display-sub">
+          {{ page.message|richtext }}
+        </h2>
       </div>
-    {% endif %}
+    </div>
+  </section>
+  <form action="{% pageurl page %}" method="POST" class="form">
+      {% csrf_token %}
 
-    {% for field in form.visible_fields %}
-      <div class="form-group">
-        {{ field.label_tag }}
-        {% render_field field class+="form-control" %}
-      </div>
-    {% endfor %}
+      {% if form.non_field_errors %}
+        <div>
+          {% for error in form.non_field_errors %}
+            {{ error }}
+          {% endfor %}
+        </div>
+      {% endif %}
 
-    <button type="submit">Submit</button>
-</form>
+      {% for field in form.visible_fields %}
+        <div class="form-group">
+          {{ field.label_tag }}
+          {% render_field field class+="form-field" %}
+        </div>
+      {% endfor %}
+
+      <button type="submit" class="form-submit text-link">Submit</button>
+  </form>
+</section>
 
 {% endblock %}

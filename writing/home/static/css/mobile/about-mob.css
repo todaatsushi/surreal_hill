@@ -1,0 +1,23 @@
+@media (max-width: 768px) {
+  .about {
+    flex-direction: column;
+  }
+
+  .sidebar-links ul {
+    display: flex;
+  }
+
+  .sns-link {
+    color: #630000;
+  }
+
+  .sns-link:link, .sns-link:visited , .sns-link:active  {
+    color: #630000;
+  }
+
+  .sns-link:hover {
+    color: #630000
+  }
+
+
+}

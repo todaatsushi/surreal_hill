@@ -1,0 +1,13 @@
+@media (max-width: 768px) {
+  .sidebar {
+    min-width: 100%;
+    width: 100%;
+    min-height: 70px;
+  }
+
+  .sidebar-links {
+    flex-direction: row;
+    margin: 0;
+    align-items: center;
+  }
+}

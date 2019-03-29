@@ -1,4 +1,4 @@
-{% load static wagtailuserbar %}
+{% load static wagtailuserbar wagtailcore_tags %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -23,7 +23,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/writing.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/desktop/writing.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/mobile/writing-mob.css' %}">
 
         {# Text Font #}
         <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Roboto" rel="stylesheet">
@@ -42,14 +43,26 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        <nav class="sidebar {% block show_nav %}{% endblock %}">
-          <div class="sidebar-links">
-          </div>
-        </nav>
+      {% wagtailuserbar %}
         <div class="all">
-          {% wagtailuserbar %}
+          <nav class="sidebar {% block show_nav %}{% endblock %}">
+            <div class="sidebar-links">
+              <ul>
+                <li><a href="/#home" class="sidebar-link">Home</a></li>
+                <li><a href="/#about" class="sidebar-link">About</a></li>
+                <li><a href="{% slugurl 'contact' %}" class="sidebar-link">Contact</a></li>
+                <li><a href="{% slugurl 'work' %}" class="sidebar-link">Work</a></li>
+              </ul>
+            </div>
+          </nav>
 
           {% block content %}{% endblock %}
+
+          <div class="sns animated fadeIn delay-1s">
+            <a href="" class="sns-link"><i class="fab fa-twitter"></i></a>
+            <a href="" class="sns-link"><i class="fab fa-blogger-b"></i></a>
+            <a href="" class="sns-link"><i class="fab fa-facebook-f"></i></a>
+          </div>
         </div>
 
         {# Global javascript #}
