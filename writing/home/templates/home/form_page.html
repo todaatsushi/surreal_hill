@@ -8,37 +8,38 @@
 
 {% block content %}
 
-<section class="container contact-main">
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="site-header display-header">{{ page.title }}</h1>
-        <h2 class="display-sub">
-          {{ page.message|richtext }}
-        </h2>
+  <section class="contact-main">
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="site-header display-header">{{ page.title }}</h1>
+          <h2 class="display-sub">
+            {{ page.message|richtext }}
+          </h2>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <form action="{% pageurl page %}" method="POST" class="form">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+          <div>
+            {% for error in form.non_field_errors %}
+              {{ error }}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% for field in form.visible_fields %}
+          <div class="form-group">
+            {{ field.label_tag }}
+            {% render_field field class+="form-field" %}
+          </div>
+        {% endfor %}
+
+        <button type="submit" class="form-submit text-link">Submit</button>
+    </form>
   </section>
-  <form action="{% pageurl page %}" method="POST" class="form">
-      {% csrf_token %}
-
-      {% if form.non_field_errors %}
-        <div>
-          {% for error in form.non_field_errors %}
-            {{ error }}
-          {% endfor %}
-        </div>
-      {% endif %}
-
-      {% for field in form.visible_fields %}
-        <div class="form-group">
-          {{ field.label_tag }}
-          {% render_field field class+="form-field" %}
-        </div>
-      {% endfor %}
-
-      <button type="submit" class="form-submit text-link">Submit</button>
-  </form>
-</section>
 
 {% endblock %}

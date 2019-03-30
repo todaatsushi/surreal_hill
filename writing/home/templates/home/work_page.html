@@ -12,9 +12,9 @@
 {% block content %}
   <section class="work-main">
 
-    <section class="work-header hero">
+    <section class="hero">
       <div class="hero-body">
-        <h1 class="site-header display-header hero-">{{ page.title }}</h1>
+        <h1 class="site-header display-header">{{ page.title }}</h1>
         <h2 class="display-sub">{{ page.summary|richtext }}</h2>
       </div>
     </section>
@@ -38,7 +38,7 @@
           {% endfor %}
         </section>
 
-        <a href="#" class="text-link dark-link">Read Articles</a>
+        <a href="/work/articles/" class="text-link dark-link">Read Articles</a>
 
       </section>
 
@@ -60,7 +60,7 @@
           {% endfor %}
         </section>
 
-        <a href="#" class="text-link dark-link">Read Stories</a>
+        <a href="/work/stories/" class="text-link dark-link">Read Stories</a>
 
       </section>
     </section>

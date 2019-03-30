@@ -77,12 +77,13 @@ class StoryIndexPage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        stories = self.get_children().live()
+        stories = self.get_children().live().order_by('-last_published_at')
         context['stories'] = stories
+
         return context
 
     class Meta:
-        verbose_name = 'StoryIndexPage'
+        verbose_name = 'Story Index Page'
 
 
 class StoryMainPage(Page):
@@ -117,7 +118,7 @@ class StoryMainPage(Page):
         return context
 
     class Meta:
-        verbose_name = 'StoryMainPage'
+        verbose_name = 'Story Main Page'
 
 
 class ChapterPage(Page):
@@ -144,7 +145,7 @@ class ChapterPage(Page):
     ]
 
     class Meta:
-        verbose_name = 'chapterpage'
+        verbose_name = 'Chapter Page'
 
 
 # TAG INDEX PAGE

@@ -1,32 +1,87 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load static wagtailcore_tags widget_tweaks %}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/desktop/story-index.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/mobile/story-index-mob.css' %}">
+{% endblock %}
 
 {% block body_class %}template-blogindexpage{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
+  <section class="container si-main">
 
-    <div class="intro">{{ page.intro|richtext }}</div>
+    <section class="hero">
+      <div class="hero-body">
+        <h1 class="site-header display-header">{{ page.title }}</h1>
+        <h2 class="display-sub">
+          {{ page.intro|richtext }}
+        </h2>
+      </div>
+    </section>
 
-    {% for story in stories %}
+
+    <section class="si-body columns is-multiline">
+      {% for story in stories %}
         {% with story=story.specific %}
-          <h2><a href="{% pageurl story %}">{{ story.title }}</a></h2>
-          {{ story.synopsis|richtext }}
-          {% with categories=story.categories.all %}
-              {% if categories %}
-                  <ul>
-                    {% for category in categories %}
-                        <li style="display: inline">
-                            {{ category.name }}
-                        </li>
-                    {% endfor %}
-                  </ul>
-              {% endif %}
-          {% endwith %}
+          <section class="column is-full story">
+
+            <aside class="menu">
+              <p class="menu-label">
+                <!-- {{ story.title }} -->
+                <!-- {{ forloop.counter }} -->
+                {{ story.last_published_at }}
+              </p>
+              <ul class="menu-list">
+                <li><a href="{{ story.url }}" class="story-link">About</a></li>
+                <li><a href="{{ story.url }}#chapters" class="story-link">Chapters</a></li>
+                <li><a href="{{ story.get_children.first.url }}" class="story-link">Read</a></li>
+              </ul>
+            </aside>
+
+            <article class="stories-syn">
+              <h4 class="site-header stories-header">{{ story.title }}</h4>
+              {{ story.synopsis|richtext }}
+            </article>
+
+            <!-- <section class="stories-org"> -->
+              <section class="stories-categories">
+                <h4 class="site-header stories-header">Categories</h4>
+                {% with categories=story.categories.all %}
+                    {% if categories %}
+                        <ul>
+                          {% for category in categories %}
+                              <li>
+                                  <a href="{{ category.url }}" class="sub-link">{{ category.name }}</a>
+                              </li>
+                          {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+              </section>
+
+              <section class="stories-tags">
+                <h4 class="site-header stories-header">Tags</h4>
+                {% with tags=story.tags.all %}
+                    {% if tags %}
+                        <ul>
+                          {% for tag in tags %}
+                              <li>
+                                  <a href="{{ category.url }}" class="sub-link">{{ tag.name }}</a>
+                              </li>
+                          {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+              </section>
+            <!-- </section> -->
+
+        </section>
         {% endwith %}
-    {% endfor %}
+      {% endfor %}
+    </section>
 
-    <a href="{{ page.get_parent.url }}">Home</a>
-
+    <a href="{{ page.get_parent.url }}" class="text-link dark-link">Return to Work</a>
+  </section>
 {% endblock %}

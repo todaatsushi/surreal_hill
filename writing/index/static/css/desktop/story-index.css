@@ -1,0 +1,56 @@
+/* PAGE LAYOUT */
+.all {
+  display: flex;
+}
+
+.si-body {
+  margin: 50px 0;
+}
+
+.si-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+/* Story card */
+.story {
+  display: flex;
+  border-bottom: 2px solid #000;
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+  width: 100%;
+  justify-content: space-around;
+  padding: 10px;
+  padding-bottom: 30px;
+  width: 100%;
+  align-items: stretch;
+}
+
+
+/* CONTENT FORMATTING */
+.stories-syn {
+  text-align: justify;
+  width: 40%;
+}
+
+.stories-org {
+  display: flex;
+  justify-content: space-around;
+  width: 40%;
+}
+
+.stories-header {
+  font-size: 1.3em;
+  margin: 0 0 10px 0;
+  letter-spacing: 1.5px;
+}
+
+/* Story menu links */
+.story-links:link, .story-links:visited, .story-links:hover , .story-links:active .story-link  {
+  color: #000;
+  text-decoration: none;
+  background-color: #fff;
+}

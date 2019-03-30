@@ -18,29 +18,17 @@
 
 /* PAGE SECTIONS */
 
-.work-header {
-  margin-bottom: 13px;
-  height: 175px;
-}
-.hero-body {
-  padding: 0 0.7rem;
-}
-
-.hero-body.display-sub {
-  margin: 5px;
-}
-
 .work-body {
   width: 100%;
 }
 
 /* BODY */
 .work-sub {
-  padding: 0 1.5rem;
+  margin-right: 1.5rem;
 }
 
 .blog-body, .stories-body {
-  margin-bottom: 40px;
+  margin-bottom: 10px;
 }
 
 /* BLOCKS */

@@ -16,4 +16,4 @@ class ContentCategory(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'story_category'
+        verbose_name = 'Story Category'

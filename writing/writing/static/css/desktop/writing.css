@@ -1,6 +1,5 @@
 /* BASIC BACKDROP */
 .all {
-  width: 100vw;
   min-height: 100vh;
   padding: 0;
   margin: 0;
@@ -9,12 +8,6 @@
 
 .site-header {
   font-family: 'Playfair Display', serif;
-}
-
-/* Title Font */
-@font-face {
-  font-family: header;
-  src: url(../fonts/Blacklisted.ttf);
 }
 
 /* SIDEBAR */
@@ -81,19 +74,13 @@
   position: absolute;
   width: 100%;
 
-  /* STROKE SETTINGS */
-  /* height: 50%;
-  top: 25%;
-  background-image: url(/media/images/brush.png);
-  background-size: cover;
-  background-position: center; */
-
   /* LINE SETTINGS */
   background: #630000;
   top: 50%;
   height: 6px;
   animation: out 0.2s cubic-bezier(1, 0, 0.58, 0.97) 1 both;
 }
+
 .text-link:hover:before {
   animation: in 0.2s cubic-bezier(1, 0, 0.58, 0.97) 1 both;
 }
@@ -144,6 +131,16 @@
   padding: 0 3px;
   cursor: pointer;
   margin-bottom: 30px;
+}
+
+/* Sublinks */
+.sub-link:link, .sub-link:visited {
+  color: #737373;
+  text-decoration: none;
+}
+
+.sub-link:hover, .sub-link:active {
+  color: #680000;
 }
 
 /* DISPLAY SETTINGS ONLY */
@@ -201,4 +198,13 @@ hr {
    font-size: 1.5em;
    letter-spacing: 1.3px;
    margin: 1rem 0;
+ }
+
+ /* Page Header */
+ .hero-body {
+   padding: 0;
+ }
+
+ .hero-body.display-sub {
+   margin: 0 0 5px 0;
  }
