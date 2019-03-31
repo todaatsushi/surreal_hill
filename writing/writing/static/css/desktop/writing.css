@@ -208,3 +208,18 @@ hr {
  .hero-body.display-sub {
    margin: 0 0 5px 0;
  }
+
+
+ /* TAG & CATEGORY FORMAT */
+ .meta {
+   display: flex;
+   justify-content: space-around;
+   /* border: 2px solid red; */
+   padding-bottom: 30px;
+ }
+
+
+ .meta-sub {
+   display: flex;
+   flex-direction: column;
+ }

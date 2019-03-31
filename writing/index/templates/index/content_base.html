@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% load static wagtailcore_tags wagtailimages_tags widget_tweaks %}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/desktop/base.css' %}">
+  {% block more_css %}
+  {% endblock %}
+{% endblock %}
+
+{% block body_class %}template-blogpage{% endblock %}
+
+{% block content %}
+    {% block main-section %}
+    {% endblock %}
+
+    <div class="menu-control">
+      <button class="button menu-toggle">Menu <i class="fas fa-book"></i></button>
+    </div>
+
+    <div class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-content" style="background-color: white;">
+        <nav class="panel">
+          <p class="panel-heading site-header">
+            {% block menu-heading %}
+            {% endblock %}
+          </p>
+          <div class="panel-block">
+            <p class="control has-icons-left">
+              <input class="input is-small" id="chapter-search" type="text" placeholder="search">
+              <span class="icon is-small is-left">
+                <i class="fas fa-search" aria-hidden="true"></i>
+              </span>
+            </p>
+          </div>
+          <p class="panel-tabs">
+            <a>All</a>
+            {% for story in page.get_parent.get_siblings %}
+              {% if story.title == page.get_parent.title %}
+                <a class="is-active">{{ story.title }}</a>
+              {% else %}
+                <a>{{ story.title }}</a>
+              {% endif %}
+            {% endfor %}
+          </p>
+          <section class="all-chapters">
+            {% for story in page.get_parent.get_siblings %}
+              <div class="story" id="{{ story.title }}">
+                {% for chapter in story.get_children %}
+                  {% if chapter.title == page.title and chapter.get_parent.title == page.get_parent.title %}
+                    <a class="panel-block is-active" href="{% pageurl chapter %}">
+                      <span class="panel-icon">
+                        <i class="fas fa-book" aria-hidden="true"></i>
+                      </span>
+                      {{ chapter.title }}
+                    </a>
+                  {% else %}
+                    <a class="panel-block" href="{% pageurl chapter %}">
+                      <span class="panel-icon">
+                        <i class="fas fa-book" aria-hidden="true"></i>
+                      </span>
+                      {{ chapter.title }}
+                    </a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            {% endfor %}
+          </section>
+
+          <div class="panel-block">
+            <button class="button menu-toggle">
+              Close
+            </button>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    {% block end-section %}
+    {% endblock %}
+{% endblock %}
+
+{% block extra_js %}
+  <script type="text/javascript" src="{% static 'js/base.js' %}"></script>
+{% endblock %}

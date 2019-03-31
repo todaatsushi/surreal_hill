@@ -1,47 +1,82 @@
-{% extends "base.html" %}
+{% extends "index/content_base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags widget_tweaks %}
 
-{% block body_class %}template-blogpage{% endblock %}
+{% block more_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/desktop/story-main.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/mobile/story-main-mob.css' %}">
+{% endblock %}
 
-{% block content %}
-    <h1>{{ page.title }}</h1>
-    <p class="meta">{{ page.published_date }}</p>
+{% block menu-heading %}
+  Site Content
+{% endblock %}
 
-    {% with categories=page.categories.all %}
-        {% if categories %}
-            <ul>
-              {% for category in categories %}
-                  <li style="display: inline">
-                      {{ category.name }}
-                  </li>
-              {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
+{% block main-section %}
+    <section class="container sm-main">
 
-    {% if page.tags.all.count %}
-        <div class="tags">
-            <h3>Tags</h3>
-            {% for tag in page.tags.all %}
-                <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
-            {% endfor %}
+      <section class="hero">
+        <div class="hero-body">
+          <h1 class="site-header display-header">{{ page.title }}</h1>
+          <h2 class="display-sub">
+            Published: {{ page.published_date }}
+          </h2>
         </div>
-    {% endif %}
+      </section>
 
-    <div class="intro">{{ page.synopsis }}</div>
-
-    {% for item in page.story_images.all %}
-        <div style="float: left; margin: 10px">
-            {% image item.image fill-320x240 %}
-            <p>{{ item.caption }}</p>
+      <section class="meta">
+        <div class="meta-sub">
+          <h4 class="site-header display-sub">Categories</h4>
+          {% with categories=page.categories.all %}
+              {% if categories %}
+                  <div class="columns is-multiline">
+                    {% for category in categories %}
+                      <div class="column is-quarter">
+                        <a href="{% slugurl 'categories' %}?tag={{ category }}">{{ category.name }}</a>
+                      </div>
+                    {% endfor %}
+                  </div>
+              {% endif %}
+          {% endwith %}
         </div>
-    {% endfor %}
+        <div class="meta-sub">
+          <h4 class="site-header display-sub">Tags</h4>
+          {% with tags=page.tags.all %}
+              {% if tags %}
+                  <div class="columns is-multiline">
+                    {% for tag in tags %}
+                      <div class="column is-quarter">
+                        <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
+                      </div>
+                    {% endfor %}
+                  </div>
+              {% endif %}
+          {% endwith %}
+        </div>
+      </section>
 
-    {% for chapter in chapters %}
-        <h2><a href="{% pageurl chapter %}">{{ chapter.title }}</a></h2>
-    {% endfor %}
+      <section class="sm-intro">
+        {{ page.synopsis|richtext }}
+      </section>
 
-    <p><a href="{{ page.get_parent.url }}">Return to index</a></p>
+      {% for item in page.story_images.all %}
+          <div style="float: left; margin: 10px">
+              {% image item.image fill-320x240 %}
+              <p>{{ item.caption }}</p>
+          </div>
+      {% endfor %}
+
+      <h4 class="title site-header display-sub">Chapters</h4>
+      <section class="chapters columns" id="chapters">
+        {% for chapter in chapters %}
+            <article class="message is-dark column is-quarter">
+              <div class="message-body">
+                <h2><a href="{% pageurl chapter %}">{{ chapter.title }}</a></h2>
+              </div>
+            </article>
+        {% endfor %}
+      </section>
+
+      <p><a href="{{ page.get_parent.url }}" class="text-link dark-link">Return to stories</a></p>
+    </section>
 
 {% endblock %}

@@ -1,0 +1,60 @@
+/* menu button */
+.menu-control {
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+}
+
+.menu-toggle {
+  size: 1.5in;
+  width: 100%;
+  color: #000;
+  border: 1px solid #000;
+}
+
+.menu-toggle:hover {
+  background-color: #fff;
+  color: #680000;
+  border: 1px solid #680000;
+}
+
+.menu-toggle i {
+  margin-left: 10px;
+}
+
+/* Modal Positioning */
+.modal {
+  justify-content: flex-start;
+  /* margin-top: 25%; */
+  padding: 15% 20px 0 20px;
+}
+
+.modal-content {
+  border-radius: 25px;
+}
+
+/* Each story's chapter div */
+.story {
+  border: none;
+}
+
+/* Active Tab */
+.panel-tabs a.is-active {
+  border-bottom-color: #680000;
+  color: #680000;
+}
+
+.panel-tabs a {
+  color: #000;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Active Icon */
+.panel-block.is-active {
+    color: #680000;
+}
+
+.panel-block.is-active .panel-icon {
+    color: #680000;
+}

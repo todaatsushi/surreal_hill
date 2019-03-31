@@ -1,30 +1,81 @@
-{% extends "base.html" %}
+{% extends "index/content_base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags widget_tweaks %}
 
-{% block body_class %}template-blogpage{% endblock %}
+{% block more_css %}
+  <link rel="stylesheet" href="{% static 'css/desktop/chapter.css' %}">
+  <link rel="stylesheet" href="{% static 'css/mobile/chapter-mob.css' %}">
+{% endblock %}
 
-{% block content %}
-    <h1>{{ page.title }}</h1>
-    <p class="meta">{{ page.published_date }}</p>
-    {% if page.tags.all.count %}
-        <div class="tags">
-            <h3>Tags</h3>
-            {% for tag in page.tags.all %}
-                <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
-            {% endfor %}
-        </div>
-    {% endif %}
+{% block menu-heading %}
+  Chapters
+{% endblock %}
 
-    {% for item in page.chapter_images.all %}
-        <div style="float: left; margin: 10px">
-            {% image item.image fill-320x240 %}
-            <p>{{ item.caption }}</p>
-        </div>
-    {% endfor %}
+{% block main-section %}
+  <section class="container chapter-main">
 
-    {{ page.body|richtext }}
+    <section class="hero">
+      <div class="hero-body">
+        <h1 class="site-header display-header">{{ page.title }}</h1>
+        <h2 class="display-sub">
+          Published: {{ page.published_date }}
+        </h2>
+      </div>
+    </section>
 
-    <p><a href="{{ page.get_parent.url }}">Return to story</a></p>
+    <section class="meta">
+      <div class="meta-sub">
+        <h4 class="site-header display-sub">Categories</h4>
+        {% with categories=page.categories.all %}
+            {% if categories %}
+                <div class="columns is-multiline">
+                  {% for category in categories %}
+                    <div class="column is-quarter">
+                      <a href="{% slugurl 'categories' %}?tag={{ category }}">{{ category.name }}</a>
+                    </div>
+                  {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+      </div>
+      <div class="meta-sub">
+        <h4 class="site-header display-sub">Tags</h4>
+        {% with tags=page.tags.all %}
+            {% if tags %}
+                <div class="columns is-multiline">
+                  {% for tag in tags %}
+                    <div class="column is-quarter">
+                      <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
+                    </div>
+                  {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+      </div>
+    </section>
 
+    <section class="chapter">
+      {{ page.body|richtext }}
+    </section>
+
+
+{% endblock %}
+
+{% block end-section %}
+    <section class="chapter-controls">
+      <div class="chapter-option">
+        {% if page.get_prev_sibling %}
+          <a href="{{ page.get_prev_sibling.url }}" class="text-link dark-link">Previous</a>
+        {% endif %}
+      </div>
+      <div class="chapter-option">
+        <a href="{{ page.get_parent.url }}" class="text-link dark-link">Return</a>
+      </div>
+      <div class="chapter-option">
+        {% if page.get_next_sibling %}
+          <a href="{{ page.get_next_sibling.url }}" class="text-link dark-link">Next</a>
+        {% endif %}
+      </div>
+    </section>
+  </section>
 {% endblock %}
