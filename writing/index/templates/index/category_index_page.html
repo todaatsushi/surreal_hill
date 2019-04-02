@@ -1,0 +1,36 @@
+{% extends "index/meta_base.html" %}
+{% load static wagtailcore_tags %}
+
+{% block header %}
+  {% if request.GET.category|length %}
+    <section class="hero">
+      <div class="hero-body">
+        <h1 class="site-header display-header">Browse Work Categories</h1>
+        <h2 class="display-sub">
+          {{ request.GET.category }}:
+        </h2>
+        <h2 class="display-sub">
+          {% if info %}
+            {{ info.one_line }}
+          {% else %}
+            Not a current category.
+          {% endif %}
+        </h2>
+      </div>
+    </section>
+
+    <article class="about-category">
+      {{ info.about|richtext }}
+    </article>
+    <hr>
+  {% else %}
+    <section class="hero">
+      <div class="hero-body">
+        <h1 class="site-header display-header">Browse Work Categories</h1>
+        <h2 class="display-sub">
+          Categories: {{ request.GET.category }}
+        </h2>
+      </div>
+    </section>
+  {% endif %}
+{% endblock %}

@@ -23,11 +23,6 @@
 }
 
 /* Modal Positioning */
-.modal {
-  justify-content: flex-start;
-  /* margin-top: 25%; */
-  padding: 15% 20px 0 20px;
-}
 
 .modal-content {
   border-radius: 25px;

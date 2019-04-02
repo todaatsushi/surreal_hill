@@ -1,31 +1,24 @@
-{% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% extends "index/meta_base.html" %}
+{% load static wagtailcore_tags %}
 
-{% block content %}
-
-    {% if request.GET.tag|length %}
-        <h4>Showing stories and work tagged "{{ request.GET.tag }}"</h4>
-    {% endif %}
-
-    <h4>Stories</h4>
-
-    {% for story in stories %}
-        <p>
-            <strong><a href="{% pageurl story %}">{{ story.title }}</a></strong><br />
-            <small>Revised: {{ story.latest_revision_created_at }}</small><br />
-        </p>
-        <hr>
-    {% endfor %}
-
-    <h4>Chapters</h4>
-
-    {% for chapter in chapters %}
-        <p>
-            <strong><a href="{% pageurl chapter %}">{{ chapter.title }}</a></strong><br />
-            <small>Revised: {{ chapter.latest_revision_created_at }}</small><br />
-            <strong>#{{ chapter.order }} of {{ chapter.get_parent }}</strong>
-        </p>
-        <hr>
-    {% endfor %}
-
+{% block header %}
+  {% if request.GET.tag|length %}
+    <section class="hero">
+      <div class="hero-body">
+        <h1 class="site-header display-header">Browse Tagged Work</h1>
+        <h2 class="display-sub">
+          Tag: {{ request.GET.tag }}
+        </h2>
+      </div>
+    </section>
+  {% else %}
+    <section class="hero">
+      <div class="hero-body">
+        <h1 class="site-header display-header">Browse Tagged Work</h1>
+        <h2 class="display-sub">
+          Tag: {{ request.GET.tag }}
+        </h2>
+      </div>
+    </section>
+  {% endif %}
 {% endblock %}

@@ -16,18 +16,17 @@ jQuery(function($) {
 
 
 jQuery(function($) {
-  // Search Chapters
+  // Search children
   // Adapted from https://www.codexworld.com/jquery-live-search-filter-on-html-table/
 
   $(document).ready(function(){
     $('#menu-search').keyup(function(){
-      console.log('Search');
       let query = $(this).val().toLowerCase();
 
-      $('.all-chapters a').each(function(){
-        let chapter = $(this).text().toLowerCase()
+      $('.all-children a').each(function(){
+        let kid = $(this).text().toLowerCase()
 
-        if (!chapter.includes(query)) {
+        if (!kid.includes(query)) {
           $(this).hide();
         } else {
           $(this).show();
@@ -43,11 +42,11 @@ jQuery(function($){
   $(document).ready(function(){
     let current = $('.panel-tabs .is-active').text();
 
-    $('.story').each(function() {
+    $('.sib').each(function() {
       // Show/Hide relevant chapters
-      let story = $(this).attr('id');
+      let sib = $(this).attr('id');
 
-      if (story == current) {
+      if (sib == current) {
         $(this).show();
       } else {
         $(this).hide();
@@ -57,15 +56,15 @@ jQuery(function($){
   });
 
 
-  // Show/hide chapters depending on selected story tab
+  // Show/hide chapters depending on selected sib tab
   $('.panel-tabs a').click(function(){
     let name = $(this).text();
 
-    $('.story').each(function() {
+    $('.sib').each(function() {
       // Show/Hide relevant chapters
-      let story = $(this).attr('id');
+      let sib = $(this).attr('id');
 
-      if (story == name || name == 'All') {
+      if (sib == name || name == 'All') {
         $(this).show();
       } else {
         $(this).hide();
@@ -73,7 +72,7 @@ jQuery(function($){
     });
 
     $('.panel-tabs a').each(function(){
-      // Highlight relevant story
+      // Highlight relevant sib
       let title = $(this).text();
 
       if (name == title) {

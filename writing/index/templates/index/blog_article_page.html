@@ -1,30 +1,79 @@
-{% extends "base.html" %}
+{% extends "index/content_base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags widget_tweaks %}
 
-{% block body_class %}template-blogpage{% endblock %}
+{% block more_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/desktop/work-main.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/mobile/work-main-mob.css' %}">
+{% endblock %}
 
-{% block content %}
-    <h1>{{ page.title }}</h1>
-    <p class="meta">{{ page.published_date }}</p>
-    {% if page.tags.all.count %}
-        <div class="tags">
-            <h3>Tags</h3>
-            {% for tag in page.tags.all %}
-                <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
-            {% endfor %}
+{% block menu-heading %}
+  Site Content
+{% endblock %}
+
+{% block main-section %}
+    <section class="container sm-main">
+
+      <section class="hero">
+        <div class="hero-body">
+          <h1 class="site-header display-header">{{ page.title }}</h1>
+          {{ page.tagline|richtext }}
+          <h2 class="display-sub">
+            <p>Published: {{ page.published_date }}</p>
+          </h2>
         </div>
-    {% endif %}
+      </section>
 
-    {% for item in page.chapter_images.all %}
-        <div style="float: left; margin: 10px">
-            {% image item.image fill-320x240 %}
-            <p>{{ item.caption }}</p>
+      <section class="meta">
+        <div class="meta-sub">
+          <h4 class="site-header display-sub">Categories</h4>
+          {% with categories=page.categories.all %}
+              {% if categories %}
+                  <div class="columns is-multiline">
+                    {% for category in categories %}
+                      <div class="column is-quarter">
+                        <a href="{% slugurl 'categories' %}?tag={{ category }}">{{ category.name }}</a>
+                      </div>
+                    {% endfor %}
+                  </div>
+              {% endif %}
+          {% endwith %}
         </div>
-    {% endfor %}
+        <div class="meta-sub">
+          <h4 class="site-header display-sub">Tags</h4>
+          {% with tags=page.tags.all %}
+              {% if tags %}
+                  <div class="columns is-multiline">
+                    {% for tag in tags %}
+                      <div class="column is-quarter">
+                        <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
+                      </div>
+                    {% endfor %}
+                  </div>
+              {% endif %}
+          {% endwith %}
+        </div>
+      </section>
 
-    {{ page.body }}
+      <section class="work-content">
+        {% for block in page.body %}
+          <section class="work-{{ block.block_type }} work-content">
+            {% if block.block_type == 'image' %}
+              {% image block.value width-400 %}
+            {% elif block.block_type == 'intro' %}
+              <article>
+                {% include_block block %}
+              </article>
+            {% else %}
+              <article>
+                {% include_block block %}
+              </article>
+          {% endif %}
+          </section>
+        {% endfor %}
+      </section>
 
-    <p><a href="{{ page.get_parent.url }}">Return to story</a></p>
+      <p><a href="{{ page.get_parent.url }}" class="text-link dark-link">Return to blog</a></p>
+    </section>
 
 {% endblock %}

@@ -1,0 +1,40 @@
+/* PAGE LAYOUT */
+.all {
+  display: flex;
+}
+
+.sm-main {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.sm-intro {
+  padding: 30px 0;
+}
+
+.meta {
+  border-bottom: 2px solid black;
+}
+
+.work-content {
+  margin-bottom: 50px;
+}
+
+/* Message */
+.message.is-dark {
+    background-color: #fff;
+}
+
+/* Article Header */
+.hero-body.rich-text p {
+  text-align: center;
+}
+
+/* Article block formatting */
+.work-intro {
+  padding: 2.5%;
+  font-size: 1.1em;
+  margin: 0;
+}

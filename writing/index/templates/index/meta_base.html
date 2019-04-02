@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags %}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/desktop/meta.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/mobile/meta-mob.css' %}">
+  {% block more_css %}
+  {% endblock %}
+{% endblock %}
+
+{% block content %}
+
+    <section class="container meta-main">
+
+      {% block header %}
+      {% endblock %}
+
+      {% if meta %}
+        <section class="meta-content">
+          {% for type in content_types %}
+            <section class="meta-type">
+              <h4 class="meta-type-header site-header"><strong>{{ type.0 }}</strong></h4>
+              {% if type.1 %}
+                {% for object in type.1 %}
+                  <section class="meta-object">
+                    <strong><a href="{% pageurl object %}" class="sub-link">{{ object.title }}</a></strong><br />
+                    <small>Revised: {{ object.latest_revision_created_at }}</small><br />
+                    {% if type.0 == 'Chapters' %}
+                      <strong>#{{ object.order }} of {{ object.get_parent }}</strong>
+                    {% endif %}
+                  </section>
+                {% endfor %}
+              {% else %}
+                <h4 class="no-meta">No {{ type.0 }}</h4>
+              {% endif %}
+              </section>
+          {% endfor %}
+        </section>
+      {% else %}
+        <section class="no-data">
+          <h1 class="display header meta-type-header">No work to show.</h1>
+        </section>
+      {% endif %}
+
+      </section>
+
+{% endblock %}

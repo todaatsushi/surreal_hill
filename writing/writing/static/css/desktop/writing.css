@@ -121,7 +121,7 @@
 }
 
 /* DARK LINKS */
-.dark-link:link, .dark-link:hover {
+.dark-link:link, .dark-link:hover, .dark-link a {
   border: none;
   font-size: 1.3em;
   background: none;
@@ -131,6 +131,10 @@
   padding: 0 3px;
   cursor: pointer;
   margin-bottom: 30px;
+}
+
+.text-link.dark-link {
+  color: #000;
 }
 
 /* Sublinks */

@@ -1,34 +1,86 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load static wagtailcore_tags widget_tweaks %}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/desktop/work-index.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/mobile/work-index-mob.css' %}">
+{% endblock %}
 
 {% block body_class %}template-blogindexpage{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
 
-    <div class="intro">{{ page.intro|richtext }}</div>
+  <section class="container si-main">
 
-    {% for piece in articles %}
+    <section class="hero">
+      <div class="hero-body">
+        <h1 class="site-header display-header">{{ page.title }}</h1>
+        <h2 class="display-sub">
+          {{ page.intro|richtext }}
+        </h2>
+      </div>
+    </section>
 
-        {% with piece=piece.specific %}
-          <h2><a href="{% pageurl piece %}">{{ piece.title }}</a></h2>
-          {{ piece.tagline|richtext }}
-          {% with categories=story.categories.all %}
-              {% if categories %}
-                  <ul>
-                    {% for category in categories %}
-                        <li style="display: inline">
-                            {{ category.name }}
-                        </li>
-                    {% endfor %}
-                  </ul>
-              {% endif %}
-          {% endwith %}
+
+    <section class="si-body columns is-multiline">
+      {% for piece in articles %}
+          {% with piece=piece.specific %}
+          <section class="column is-full blog">
+
+            <section class="hero blog-headline">
+              <div class="hero-body">
+                <h4 class="site-header title is-2"><a href="{% pageurl piece %}" class="blog-title">{{ piece.title }}</a></h4>
+                <h6 class="sub-header">{{ piece.last_published_at }}</h6>
+              </div>
+            </section>
+
+            <article class="blog-intro">
+              {{ piece.tagline|richtext }}
+            </article>
+
+            <section class="meta-data">
+
+              <section class="stories-categories">
+                <h4 class="site-header stories-header">Categories</h4>
+                {% with categories=piece.categories.all %}
+                    {% if categories %}
+                        <ul>
+                          {% for category in categories %}
+                              <li>
+                                  <a href="{{ category.url }}" class="sub-link">{{ category.name }}</a>
+                              </li>
+                          {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+              </section>
+
+              <section class="stories-tags">
+                <h4 class="site-header stories-header">Tags</h4>
+                {% with tags=piece.tags.all %}
+                    {% if tags %}
+                        <ul>
+                          {% for tag in tags %}
+                              <li>
+                                  <a href="{{ category.url }}" class="sub-link">{{ tag.name }}</a>
+                              </li>
+                          {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+              </section>
+
+            </section>
+
+        </section>
         {% endwith %}
+      {% endfor %}
+    </section>
 
-    {% endfor %}
-
-    <a href="{{ page.get_parent.url }}">Home</a>
+    <section class="return">
+      <a href="{{ page.get_parent.url }}" class="text-link dark-link">Return to Work</a>
+    </section>
+  </section>
 
 {% endblock %}

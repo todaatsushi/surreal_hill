@@ -15,6 +15,16 @@
   width: 100%;
 }
 
+.si-main.return{
+  width: 10%;
+  border: 1px solid pink;
+}
+
+.meta-data {
+  display: flex;
+  justify-content: space-around;
+}
+
 /* Story card */
 .story {
   display: flex;
@@ -29,6 +39,31 @@
   align-items: stretch;
 }
 
+/* Article Card */
+
+.blog {
+  border-bottom: 2px solid black;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.blog-headline {
+  /* border-bottom: 2px solid black; */
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.blog-intro {
+  margin: 20px;
+}
+
+.blog-title, .blog-title:link, .blog-title:visited {
+  color: #000;
+}
+
+.blog-title:hover {
+  color: #680000;
+}
 
 /* CONTENT FORMATTING */
 .stories-syn {

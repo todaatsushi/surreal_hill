@@ -59,7 +59,6 @@ class BlogArticlePage(Page):
         FieldPanel('tagline'),
         StreamFieldPanel('body'),
         InlinePanel('article_images', label="Article images"),
-
     ]
 
 
@@ -158,10 +157,38 @@ class TagIndexPage(Page):
         # Chapters & Stories Seperately
         chapters = ChapterPage.objects.filter(tags__name=tag)
         stories = StoryMainPage.objects.filter(tags__name=tag)
+        articles = BlogArticlePage.objects.filter(tags__name=tag)
 
         context = super().get_context(request)
-        context['chapters'] = chapters
-        context['stories'] = stories
+        context['content_types'] = [('Stories', stories),
+                                    ('Chapters', chapters),
+                                    ('Articles', articles)]
+        context['meta'] = tag
+
+        return context
+
+
+# Cetegory index page
+class CategoryIndexPage(Page):
+
+    def get_context(self, request):
+        # get category
+        category = request.GET.get('category')
+
+        stories = StoryMainPage.objects.filter(categories__name=category)
+        articles = BlogArticlePage.objects.filter(categories__name=category)
+        category_info = ContentCategory.objects.filter(name=category)
+
+        context = super().get_context(request)
+        context['content_types'] = [('Stories', stories),
+                                    ('Articles', articles)]
+        context['meta'] = category
+
+        try:
+            context['info'] = category_info[0]
+        except IndexError:
+            context['info'] = None
+
         return context
 
 

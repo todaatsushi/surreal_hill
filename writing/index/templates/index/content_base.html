@@ -4,6 +4,7 @@
 
 {% block extra_css %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/desktop/base.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/mobile/base-mob.css' %}">
   {% block more_css %}
   {% endblock %}
 {% endblock %}
@@ -26,41 +27,45 @@
             {% block menu-heading %}
             {% endblock %}
           </p>
+
           <div class="panel-block">
             <p class="control has-icons-left">
-              <input class="input is-small" id="chapter-search" type="text" placeholder="search">
+              <input class="input is-small" id="menu-search" type="text" placeholder="Search">
               <span class="icon is-small is-left">
                 <i class="fas fa-search" aria-hidden="true"></i>
               </span>
             </p>
           </div>
+
           <p class="panel-tabs">
             <a>All</a>
-            {% for story in page.get_parent.get_siblings %}
-              {% if story.title == page.get_parent.title %}
-                <a class="is-active">{{ story.title }}</a>
+            {% for sib in page.get_parent.get_siblings %}
+              {% if sib.title == page.get_parent.title %}
+                <a class="is-active">{{ sib.title }}</a>
+              {% elif sib.title == 'Tag Index' or sib.title == 'Categories Index'%}
               {% else %}
-                <a>{{ story.title }}</a>
+                <a>{{ sib.title }}</a>
               {% endif %}
             {% endfor %}
           </p>
-          <section class="all-chapters">
-            {% for story in page.get_parent.get_siblings %}
-              <div class="story" id="{{ story.title }}">
-                {% for chapter in story.get_children %}
-                  {% if chapter.title == page.title and chapter.get_parent.title == page.get_parent.title %}
-                    <a class="panel-block is-active" href="{% pageurl chapter %}">
+
+          <section class="all-children">
+            {% for sib in page.get_parent.get_siblings %}
+              <div class="sib" id="{{ sib.title }}">
+                {% for kid in sib.get_children %}
+                  {% if kid.title == page.title and kid.get_parent.title == page.get_parent.title %}
+                    <a class="panel-block is-active" href="{% pageurl kid %}">
                       <span class="panel-icon">
                         <i class="fas fa-book" aria-hidden="true"></i>
                       </span>
-                      {{ chapter.title }}
+                      {{ kid.title }}
                     </a>
                   {% else %}
-                    <a class="panel-block" href="{% pageurl chapter %}">
+                    <a class="panel-block" href="{% pageurl kid %}">
                       <span class="panel-icon">
                         <i class="fas fa-book" aria-hidden="true"></i>
                       </span>
-                      {{ chapter.title }}
+                      {{ kid.title }}
                     </a>
                   {% endif %}
                 {% endfor %}
