@@ -149,7 +149,6 @@
 
 /* DISPLAY SETTINGS ONLY */
 
-/* HIDE NAV */
 .false {
   display: none;
 }
@@ -227,3 +226,12 @@ hr {
    display: flex;
    flex-direction: column;
  }
+
+/* Menu Icons */
+.full-menu {
+  display: block;
+}
+
+.mob-menu {
+  display: none;
+}

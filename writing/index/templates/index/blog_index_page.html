@@ -48,7 +48,7 @@
                         <ul>
                           {% for category in categories %}
                               <li>
-                                  <a href="{{ category.url }}" class="sub-link">{{ category.name }}</a>
+                                  <a href="{% slugurl 'categories' %}?category={{ category }}" class="sub-link">{{ category.name }}</a>
                               </li>
                           {% endfor %}
                         </ul>
@@ -63,7 +63,7 @@
                         <ul>
                           {% for tag in tags %}
                               <li>
-                                  <a href="{{ category.url }}" class="sub-link">{{ tag.name }}</a>
+                                  <a href="{% slugurl 'tags' %}?tag={{ tag }}" class="sub-link">{{ tag.name }}</a>
                               </li>
                           {% endfor %}
                         </ul>

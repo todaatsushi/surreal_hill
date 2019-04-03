@@ -32,7 +32,7 @@
                   <div class="columns is-multiline">
                     {% for category in categories %}
                       <div class="column is-quarter">
-                        <a href="{% slugurl 'categories' %}?tag={{ category }}">{{ category.name }}</a>
+                        <a href="{% slugurl 'categories' %}?category={{ category }}" class="sub-link">{{ category.name }}</a>
                       </div>
                     {% endfor %}
                   </div>
@@ -46,7 +46,7 @@
                   <div class="columns is-multiline">
                     {% for tag in tags %}
                       <div class="column is-quarter">
-                        <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
+                        <a href="{% slugurl 'tags' %}?tag={{ tag }}" class="sub-link">{{ tag }}</a>
                       </div>
                     {% endfor %}
                   </div>

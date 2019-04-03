@@ -25,20 +25,6 @@
 
     <section class="meta">
       <div class="meta-sub">
-        <h4 class="site-header display-sub">Categories</h4>
-        {% with categories=page.categories.all %}
-            {% if categories %}
-                <div class="columns is-multiline">
-                  {% for category in categories %}
-                    <div class="column is-quarter">
-                      <a href="{% slugurl 'categories' %}?tag={{ category }}">{{ category.name }}</a>
-                    </div>
-                  {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
-      </div>
-      <div class="meta-sub">
         <h4 class="site-header display-sub">Tags</h4>
         {% with tags=page.tags.all %}
             {% if tags %}

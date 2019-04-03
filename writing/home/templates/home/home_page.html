@@ -43,13 +43,30 @@
     <nav class="sidebar">
       <div class="sidebar-links">
         <ul>
-          <a href="#home" class="sidebar-link">Home</a>
-          <li><a href="/#about" class="sidebar-link">About</a></li>
-          {% for sub in page.get_children %}
-            <li>
-              <a href="{% pageurl sub %}" class="sidebar-link">{{ sub }}</a>
-            </li>
-          {% endfor %}
+          <li>
+            <a href="/#home" class="sidebar-link">
+              <span class="full-menu">Home</span>
+              <span class="mob-menu"><i class="fas fa-home"></i></span>
+            </a>
+          </li>
+          <li>
+            <a href="/#about" class="sidebar-link">
+              <span class="full-menu">About</span>
+              <span class="mob-menu"><i class="fas fa-info"></i></span>
+            </a>
+          </li>
+          <li>
+            <a href="{% slugurl 'contact' %}" class="sidebar-link">
+              <span class="full-menu">Contact</span>
+              <span class="mob-menu"><i class="far fa-envelope"></i></span>
+            </a>
+          </li>
+          <li>
+            <a href="{% slugurl 'work' %}" class="sidebar-link">
+              <span class="full-menu">Work</span>
+              <span class="mob-menu"><i class="fas fa-book"></i></span>
+            </a>
+          </li>
         </ul>
       </div>
     </nav>

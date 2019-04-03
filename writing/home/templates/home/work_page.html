@@ -10,7 +10,7 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-  <section class="work-main">
+  <section class="container work-main">
 
     <section class="hero">
       <div class="hero-body">
@@ -28,7 +28,7 @@
               {% if block.block_type == 'image' %}
                 {% image block.value height-100px %}
               {% elif block.block_type == 'heading' %}
-                <h2 class="site-header">{% include_block block %}</h2>
+                <h2 class="site-header"><a href="/work/articles/" class="sub-link">{% include_block block %}</a></h2>
               {% else %}
                 <article class="block-p">
                   {% include_block block %}
@@ -50,7 +50,7 @@
               {% if block.block_type == 'image' %}
                 {% image block.value height-100px %}
               {% elif block.block_type == 'heading' %}
-                <h4 class="site-header title-header">{% include_block block %}</h4>
+                <h4 class="site-header title-header"><a href="/work/stories/" class="sub-link">{% include_block block %}</a></h4>
               {% else %}
                 <article>
                   {% include_block block %}
