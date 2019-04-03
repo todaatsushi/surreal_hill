@@ -1,13 +1,22 @@
 from .base import *
+from dotenv import load_dotenv
+
+
+PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(PROJECT_DIR)
+
+# Env Variables
+# project_folder = os.path.expanduser(os.path.join(BASE_DIR, 'writing'))
+load_dotenv('.env')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'c=3ol40=emu-k2i4#w2l@_e2#7@%$!3m8$)9-wh*lmr)f37d06'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: define the correct hosts in production!
-ALLOWED_HOSTS = ['*'] 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
