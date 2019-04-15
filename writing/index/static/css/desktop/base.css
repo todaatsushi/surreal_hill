@@ -1,3 +1,8 @@
+/* Rich text p spacing */
+.rich-text p {
+  margin-bottom: 20px;
+}
+
 /* menu button */
 .menu-control {
   position: fixed;
