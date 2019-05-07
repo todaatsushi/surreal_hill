@@ -6,4 +6,10 @@ writing/home/__pycache__
 writing/index/__pycache__
 writing/search/__pycache__
 writing/.env
-writing/Dockerfile
+Dockerfile
+.vscode
+.gitignore
+secret.txt
+to-do.rtf
+
+__pycache__/
