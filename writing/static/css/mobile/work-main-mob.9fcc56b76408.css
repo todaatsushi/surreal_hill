@@ -1,0 +1,9 @@
+@media (max-width: 768px) {
+  .all {
+    flex-direction: column;
+  }
+
+  .sm-main {
+    margin-bottom: 15%;
+  }
+}

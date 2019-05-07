@@ -1,0 +1,43 @@
+/* PAGE LAYOUT */
+.all {
+  display: flex;
+}
+
+.work-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+  padding: 0 3rem;
+}
+
+.work-sub {
+  padding-bottom: 30px;
+}
+
+/* PAGE SECTIONS */
+
+.work-body {
+  width: 100%;
+}
+
+/* BODY */
+.work-sub {
+  margin-right: 1.5rem;
+}
+
+.blog-body, .stories-body {
+  margin-bottom: 10px;
+}
+
+/* BLOCKS */
+.blog-heading, .stories-heading {
+  font-size: 2em;
+  letter-spacing: 2px;
+}
+
+.stories-about p,  .blog-about p {
+  text-align: justify;
+  margin: 10px 0;
+}

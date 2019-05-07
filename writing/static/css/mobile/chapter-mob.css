@@ -1,0 +1,13 @@
+@media (max-width: 768px) {
+  .all {
+    flex-direction: column;
+  }
+
+  .chapter-main {
+    margin-bottom: 20%;
+  }
+
+  .chapter-controls {
+    flex-direction: column;
+  }
+}

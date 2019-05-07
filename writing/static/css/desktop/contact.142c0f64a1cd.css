@@ -1,0 +1,51 @@
+/* PAGE LAYOUT */
+.all {
+  display: flex;
+}
+
+.contact-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+
+/* FORM */
+.form {
+  width: 90%;
+}
+
+/* FIELDS */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.form-group label {
+  font-size: 1.1em;
+  margin-bottom: 5px;
+}
+
+.form-field {
+  border: 0.5px solid #989c94;
+  font-size: 1em;
+  padding: 0.7em;
+  border-radius: 6px;
+}
+
+
+/* BUTTON */
+.form-submit, .form-submit:hover {
+  border: none;
+  font-size: 1.3em;
+  background: none;
+  font-family: "Playfair Display", serif;
+  color: black;
+  margin: 0;
+  padding: 0 3px;
+  cursor: pointer;
+  margin-bottom: 30px;
+}

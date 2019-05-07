@@ -1,0 +1,10 @@
+@media (max-width: 768px) {
+  .all {
+    flex-direction: column;
+  }
+
+  .work-header {
+    height: 15%;
+  }
+
+}

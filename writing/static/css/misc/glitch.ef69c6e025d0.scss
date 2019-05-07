@@ -1,0 +1,62 @@
+// REFERENCED FROM https: //codemyui.com/css-gliched-text/
+
+.glitch{
+  color:#d3d3d3;
+  font-size:5em;
+  position:relative;
+  width: 400px;
+  height: 250px;
+  margin:0 auto;
+  // border: 3px solid #FFF800;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+@keyframes noise-anim{
+  $steps:20;
+  @for $i from 0 through $steps{
+    #{percentage($i*(1/$steps))}{
+      clip:rect(random(100)+px,9999px,random(100)+px,0);
+    }
+  }
+}
+.glitch:after{
+  content:attr(data-text);
+  position:absolute;
+  // left:2px;
+  left: 29px;
+  top:3px;
+  // position: relative;
+  // width: 400px;
+  // height: 250px;
+  // margin:0;
+
+  text-shadow:-1px 0 #c42b2b;
+  color:#d3d3d3;
+  background:#000;
+  overflow:hidden;
+  clip:rect(0,900px,0,0);
+  animation:noise-anim 3s infinite linear alternate-reverse;
+}
+
+@keyframes noise-anim-2{
+  $steps:20;
+  @for $i from 0 through $steps{
+    #{percentage($i*(1/$steps))}{
+      clip:rect(random(100)+px,9999px,random(100)+px,0);
+    }
+  }
+}
+.glitch:before{
+  content:attr(data-text);
+  position:absolute;
+  left:25px;
+  text-shadow:1px 0 #002b99;
+  top:3px;
+  color:#d3d3d3;
+  background:#000;
+  overflow:hidden;
+  clip:rect(0,900px,0,0);
+  animation:noise-anim-2 5s infinite linear alternate-reverse;
+}

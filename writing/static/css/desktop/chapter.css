@@ -1,0 +1,22 @@
+/* PAGE LAYOUT */
+.all {
+  display: flex;
+}
+
+.chapter-main {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.chapter-controls {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.chapter {
+  margin-bottom: 40px;
+}

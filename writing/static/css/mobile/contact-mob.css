@@ -1,0 +1,14 @@
+@media (max-width: 768px) {
+  .all {
+    flex-direction: column;
+  }
+
+  .form button {
+    margin-bottom: 18%;
+  }
+
+  .form {
+    padding: 1.5rem;
+    width: 90vw;
+  }
+}

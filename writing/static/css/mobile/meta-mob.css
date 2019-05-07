@@ -1,0 +1,10 @@
+@media (max-width: 768px) {
+  .all {
+    flex-direction: column;
+  }
+
+  .meta-main {
+    margin-bottom: 15%;
+  }
+
+}

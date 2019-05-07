@@ -1,0 +1,48 @@
+@media (max-width: 768px) {
+  .sidebar {
+    min-width: 100%;
+    width: 100%;
+    min-height: 70px;
+  }
+
+  .sidebar-links {
+    flex-direction: row;
+    margin: 0;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+  }
+
+  .sidebar-links ul {
+    display: flex;
+  }
+
+  .sns-link {
+    color: #680000;
+  }
+
+  .sns-link:link, .sns-link:visited , .sns-link:active  {
+    color: #680000;
+  }
+
+  .sns-link:hover {
+    color: #b8bacf
+  }
+
+  .mob-margin {
+    margin: 0 0 50px 0;
+  }
+}
+
+@media (max-width: 506px) {
+  /* Menu Icons */
+  .full-menu {
+    display: none;
+  }
+
+  .mob-menu {
+    display: block;
+  }
+
+}

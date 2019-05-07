@@ -1,0 +1,40 @@
+/* Page Layout */
+.all {
+  display: flex;
+}
+
+.meta-main {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+  width: 100%;
+  margin-bottom: 5%;
+}
+
+.meta-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Headers */
+.meta-type-header {
+  font-size: 2em;
+  letter-spacing: 2px;
+}
+
+.no-meta {
+  font-size: 1.5em;
+  margin: 10px 0;
+}
+
+/* Content Sections */
+.meta-type {
+  margin: 10px 0;
+  padding: 10px 0;
+  border-bottom: 1px solid black;
+}
+
+.meta-object {
+  margin: 10px 0;
+  padding: 10px 0;
+}

@@ -1,0 +1,6 @@
+@media (max-width:768px) {
+  .modal {
+    justify-content: center;
+    padding: 15% 20px 0 20px;
+  }
+}
