@@ -19,5 +19,16 @@
     color: #630000
   }
 
+  .about-foot {
+    font-size: 1rem;
+    margin-bottom: 50px;
+  }
+
+  .about-links {
+    margin: 4px;
+    letter-spacing: 0;
+  }
+  
+
 
 }
