@@ -24,7 +24,8 @@
 
 /* ABOUT OPTIONS */
 .splash-menu {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   height: 250px;
   font-size: 2em;
   color: #f9f9f9;
