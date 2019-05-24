@@ -5,11 +5,15 @@
 {% block extra_css %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/desktop/about.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/mobile/about-mob.css' %}">
+  
+  <link rel="stylesheet" type="text/css" href="{% static 'css/misc/errors.css' %}">
 {% endblock %}
 
 
 {% block content %}
-    {% block message %}{% endblock %}
+    <section class="error-body">
+        {% block message %}{% endblock %}
+    </section>
 
     <section class="about-foot">
         <a href="/#home" class="sidebar-link">
