@@ -1,7 +1,10 @@
 {% extends "error_base.html" %}
 
-{% block message %}
-    <h1>Internal server error</h1>
-
-    <h2>Sorry, there seems to be an error. Please try again soon.</h2>
+{% block code %}
+    500
 {% endblock %}
+
+{% block message %}
+    <h1>This is due to an internal server error. Please contact the developer.</h1>
+{% endblock %}
+

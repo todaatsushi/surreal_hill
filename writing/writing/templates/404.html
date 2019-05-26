@@ -1,8 +1,10 @@
 {% extends "error_base.html" %}
 
-{% block message %}
-    <h1>Page not found</h1>
+{% block code %}
+    404
+{% endblock %}
 
-    <h2>Sorry, this page could not be found.</h2>
+{% block message %}
+    <h1>Sorry! This page could not be found - possibly because it may not exist. Check the url or report a broken link.</h1>
 {% endblock %}
 

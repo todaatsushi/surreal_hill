@@ -12,7 +12,21 @@
 
 {% block content %}
     <section class="error-body">
-        {% block message %}{% endblock %}
+        <section class="hero">
+            <div class="hero-body">
+                <div class="container">
+                <h1 class="site-header display-header">Error! {% block code %} {% endblock %}</h1>
+                <h2 class="display-sub">
+                    {% block message %} {% endblock %}
+                </h2>
+                </div>
+            </div>
+        </section>
+
+        <div class="extra">
+            <h1>Is this error valid?</h1>
+            <h3>If not, please raise an issue on <a href="https://github.com/broadsinatlanta/surreal_hill">Github</a>.</h3>
+        </div>
     </section>
 
     <section class="about-foot">
