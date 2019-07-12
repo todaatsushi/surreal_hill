@@ -1,10 +1,10 @@
-beautifulsoup4==4.7.1
+beautifulsoup4==4.6.0
 certifi==2019.6.16
 chardet==3.0.4
-Django==2.2.2
+Django==2.2.3
 django-extensions==2.1.9
 django-modelcluster==4.4
-django-taggit==1.1.0
+django-taggit==0.24.0
 django-treebeard==4.3
 django-widget-tweaks==1.4.5
 djangorestframework==3.9.4
@@ -14,7 +14,7 @@ flake8==3.7.7
 html5lib==1.0.1
 idna==2.8
 mccabe==0.6.1
-Pillow==6.0.0
+Pillow==5.4.1
 pycodestyle==2.5.0
 pyflakes==2.1.1
 python-dotenv==0.10.3
