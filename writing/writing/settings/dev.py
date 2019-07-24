@@ -16,9 +16,20 @@ DEBUG = (os.environ.get('DEBUG') == 'True')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: define the correct hosts in production!
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'ZenoWatts.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'ZenoWatts.pythonanywhere.com', 'zenowatts.com']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# Database
+# https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 
 try:
