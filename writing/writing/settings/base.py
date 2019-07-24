@@ -10,6 +10,9 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 
+# SECURITY WARNING: define the correct hosts in production!
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'www.zenowatts.com']
+
 # Application definition
 
 INSTALLED_APPS = [
