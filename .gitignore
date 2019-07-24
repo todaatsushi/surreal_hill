@@ -1,5 +1,5 @@
 aenv/
-writing/db.sqlite3
+writing/*.sqlite3
 writing/Dockerfile
 writing/writing/__pycache__
 writing/home/__pycache__

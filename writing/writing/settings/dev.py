@@ -2,6 +2,7 @@ from .base import *
 from dotenv import load_dotenv
 
 
+print('Running development settings.')
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
@@ -18,17 +19,13 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
-# Database
-# https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
+## Use SQLITE for dev/testing
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 try:
     from .local import *

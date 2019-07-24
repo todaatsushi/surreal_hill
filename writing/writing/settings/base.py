@@ -58,6 +58,21 @@ MIDDLEWARE = [
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
+
+# Database
+# https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+
+# Database
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+    }
+}
+
 ROOT_URLCONF = 'writing.urls'
 
 TEMPLATES = [
