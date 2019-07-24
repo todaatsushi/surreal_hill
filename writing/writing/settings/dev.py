@@ -19,14 +19,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-## Use SQLITE for dev/testing
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 try:
     from .local import *
 except ImportError:
