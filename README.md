@@ -33,6 +33,14 @@ Surreal Hill expects the following variables:
 
 * SECRET_KEY - Django secret key
 * DEBUG - 'True' for debug mode
+* LOCAL_HOST - Name of local host to auto load DEBUG mode (use ```socket.gethostname()``` ).
+* CUSTOM_DOMAIN - name of your domain to serve on e.g. www.xyz.com or localhost etc.
+
+# MySQL Settings
+* DB_NAME - Name of MySQL db
+* DB_USER - Username
+* DB_PASSWORD
+* DB_HOST - Host address
 
 
 ## Extra installation notes
