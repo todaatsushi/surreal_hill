@@ -3,48 +3,31 @@
 {% load static wagtailcore_tags widget_tweaks %}
 
 {% block extra_css %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/desktop/about.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/mobile/about-mob.css' %}">
-  
   <link rel="stylesheet" type="text/css" href="{% static 'css/misc/errors.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/desktop/contact.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/mobile/contact-mob.css' %}">
 {% endblock %}
 
 
 {% block content %}
-    <section class="error-body">
+    <section class="contact-main">
         <section class="hero">
-            <div class="hero-body">
-                <div class="container">
-                <h1 class="site-header display-header">Error! {% block code %} {% endblock %}</h1>
-                <h2 class="display-sub">
+        <div class="hero-body">
+            <div class="container">
+            <h1 class="site-header display-header">Error! {% block code %} {% endblock %}</h1>
+            <h2 class="display-sub">
+                <p class="is-size-5">
                     {% block message %} {% endblock %}
-                </h2>
-                </div>
+                </p>
+            </h2>
             </div>
+        </div>
         </section>
 
         <div class="extra">
-            <h1>Is this error valid?</h1>
-            <h3>If not, please raise an issue on <a href="https://github.com/broadsinatlanta/surreal_hill">Github</a>.</h3>
+            <p class="is-size-5">Is this error valid?</p>
+            <p class="is-size-5">If not, please raise an issue on <a href="https://github.com/todaatsushi/surreal_hill">GitHub</a>.</p>
         </div>
-    </section>
-
-    <section class="about-foot">
-        <a href="/#home" class="sidebar-link">
-            <span class="full-menu">Home</span>
-            <span class="mob-menu"><i class="fas fa-home"></i></span>
-        </a>
-        <a href="/#about" class="sidebar-link">
-            <span class="full-menu">About</span>
-            <span class="mob-menu"><i class="fas fa-info"></i></span>
-        </a>
-        <a href="{% slugurl 'contact' %}" class="sidebar-link">
-            <span class="full-menu">Contact</span>
-            <span class="mob-menu"><i class="far fa-envelope"></i></span>
-        </a>
-        <a href="{% slugurl 'work' %}" class="sidebar-link">
-            <span class="full-menu">Work</span>
-            <span class="mob-menu"><i class="fas fa-book"></i></span>
-        </a>
     </section>
 {% endblock %}
